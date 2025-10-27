@@ -64,31 +64,36 @@ list.forEach((item) => {
 
 const GOOGLE_SCRIPT_URL_THAM_DU =
   "https://script.google.com/macros/s/AKfycbyXF4GN7Yz0ddrO1fhbXIfGau22xtddkH2I1VcuW5Eec_4_yRX8nmBrU6ZK0II_taXi/exec";
-document.querySelector("#tdidxoc8").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const form = e.target; // Lấy form để reset sau này
-  const formData = new FormData(form);
-  let selected = formData.getAll("select_1");
-  console.log("vaoday", selected);
 
-  const data = {
-    name: "'" + form.full_name.value,
-    relationship: "'" + form.text_input_1.value,
-    message: "'" + form.text_input_2.value,
-    isInvite: selected.join(", "),
-  };
-  fetch(GOOGLE_SCRIPT_URL_THAM_DU, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => {
-      res.json();
-      form.reset(); // Reset form sau khi submit thành công
-    }) // Nếu Apps Script trả về JSON
-    .then((res) => console.log(res));
+const closeIds = ["w-3o68wrvj", "w-ysykddk8", "w-4e9p787b"];
+const formIds = ["f2z9fwg4", "cewgewaj", "tdidxoc8"];
+
+formIds.forEach(function (id, index) {
+  const form = document.getElementById(id);
+  const closeBtn = document.getElementById(closeIds[index]);
+  if (!form || !closeBtn) return; // an toàn nếu thiếu phần tử
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    closeBtn.click();
+    const data = {
+      name: "'" + form.full_name.value,
+      relationship: "'" + form.text_input_1.value,
+      message: "'" + form.text_input_2.value,
+    };
+    fetch(GOOGLE_SCRIPT_URL_THAM_DU, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        res.json();
+        form.reset(); // Reset form sau khi submit thành công\
+      }) // Nếu Apps Script trả về JSON
+      .catch((err) => console.log(err));
+  });
 });
 
 // Hiển thị notification
@@ -131,8 +136,8 @@ let messages = []; // Chuyển sang `let`
 
 // Cấu hình
 const config = {
-  displayDuration: 1000,
-  intervalTime: 17000,
+  displayDuration: 4000,
+  intervalTime: 7000,
 };
 
 let autoInterval;
