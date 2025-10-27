@@ -1,3 +1,43 @@
+/**
+ * Thay background sau khi ảnh load xong
+ * @param {String} selector - CSS selector
+ * @param {String} imageUrl - URL ảnh mới
+ * @param {Object} styleOptions - Tuỳ chọn style nền
+ */
+function safeSetBackground(selector, imageUrl, styleOptions = {}) {
+  const el = document.querySelector(selector);
+  if (!el) return;
+
+  const img = new Image();
+  img.src = imageUrl;
+
+  img.onload = () => {
+    // Chỉ đổi khi ảnh đã sẵn sàng
+    el.style.backgroundImage = `url('${imageUrl}')`;
+  };
+
+  img.onerror = () => {
+    console.warn("Không load được ảnh:", imageUrl);
+  };
+}
+
+const list = [
+  // {
+  //   selector: "#w-9xiryvgi .image-background",
+  //   url: "./images/12.jpg",
+  // },
+  // { selector: "#w-jp9nko93 .image-background", url: "./images/32.jpg" },
+  // { selector: "#w-qtuwe23y .image-background", url: "./images/31.jpg" },
+  // { selector: "#w-2w9mb918 .image-background", url: "./images/3.jpg" },
+  // { selector: "#w-2w9mb918 .image-background", url: "./images/3.jpg" },
+  // { selector: "#w-pb7be6s0 .image-background", url: "./images/5.jpg" },
+  // { selector: "#w-0qkm3qey .image-background", url: "./images/21.jpg" },
+];
+
+list.forEach((item) => {
+  safeSetBackground(item.selector, item.url);
+});
+
 // Chặn user F12
 // document.addEventListener("keydown", function (e) {
 //   // F12
