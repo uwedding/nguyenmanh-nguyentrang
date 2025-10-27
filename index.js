@@ -63,8 +63,8 @@ list.forEach((item) => {
 // Lưu form vào GG sheet
 
 const GOOGLE_SCRIPT_URL_THAM_DU =
-  "https://script.google.com/macros/s/AKfycby7FYN8wWPKRu3TlbsziN3dHioY_0Cx0Dq3bI5Sh4jYNmVFuDpkoRzIU89-j7PVfV6WWA/exec";
-document.querySelector("#form").addEventListener("submit", function (e) {
+  "https://script.google.com/macros/s/AKfycbyXF4GN7Yz0ddrO1fhbXIfGau22xtddkH2I1VcuW5Eec_4_yRX8nmBrU6ZK0II_taXi/exec";
+document.querySelector("#tdidxoc8").addEventListener("submit", function (e) {
   e.preventDefault();
   const form = e.target; // Lấy form để reset sau này
   const formData = new FormData(form);
@@ -124,7 +124,7 @@ document.querySelector("#form").addEventListener("submit", function (e) {
 </style> */
 }
 
-const sheetID = "1VGWHaefz0V1T6xaOasWkUlj_4Yn8ZUQyEC0wDo2MRtQ";
+const sheetID = "1T-Q3f6Yilmq1O1b-oXPFrSAkH7uYjjhUlcVstnZQlaM";
 const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
 
 let messages = []; // Chuyển sang `let`
